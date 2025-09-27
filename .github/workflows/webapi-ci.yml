@@ -6,15 +6,17 @@ on:
   pull_request:
     branches: [main, develop]
 
-# Evita que se acumulen ejecuciones viejas
 concurrency:
   group: webapi-ci-${{ github.ref }}
   cancel-in-progress: true
 
+env:
+  SOLUTION_FILE: schoolApi.sln
+  WEBAPI_PROJECT: school/school.csproj   # ⬅️ si tu .csproj se llama distinto, ajusta esta ruta
+
 jobs:
   build_test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,9 +24,8 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'      # ajusta si usas 7.x/9.x
+          dotnet-version: '9.0.110'    # o 7.0.x/9.0.x según uses
 
-      # Cache de paquetes NuGet
       - name: Cache NuGet
         uses: actions/cache@v4
         with:
@@ -32,16 +33,28 @@ jobs:
           key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/global.json', '**/nuget.config') }}
           restore-keys: nuget-${{ runner.os }}-
 
-      - name: Restore
-        run: dotnet restore
+      - name: Restore (solution)
+        run: dotnet restore "$SOLUTION_FILE"
 
       - name: Build (Release)
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build "$SOLUTION_FILE" --configuration Release --no-restore
 
+      # Busca y ejecuta automáticamente todos los *Tests.csproj que tengas
       - name: Test
-        run: dotnet test --configuration Release --no-build --logger "trx;LogFileName=test_results.trx"
+        run: |
+          set -e
+          projects=$(find . -name "*Tests.csproj" -print)
+          if [ -n "$projects" ]; then
+            for p in $projects; do
+              echo ">> dotnet test $p"
+              dotnet test "$p" --configuration Release --no-build --logger "trx;LogFileName=test_results.trx"
+            done
+          else
+            echo "No hay proyectos de pruebas (*Tests.csproj); continúo."
+          fi
 
-      - name: Publicar resultados de pruebas
+      - name: Subir resultados de pruebas
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
@@ -57,16 +70,15 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.110'
+          dotnet-version: '8.0.x'
 
-      - name: Publish (self-contained trim opcional)
-        # Cambia src/TuProyecto.Api por la ruta a tu .csproj de Web API
-        run: >
-          dotnet publish src/TuProyecto.Api/TuProyecto.Api.csproj
-          --configuration Release
-          --no-restore
-          --output ./publish
-          -p:PublishTrimmed=false
+      - name: Publish Web API
+        run: |
+          dotnet publish "$WEBAPI_PROJECT" \
+            --configuration Release \
+            --no-restore \
+            --output ./publish \
+            -p:PublishTrimmed=false
 
       - name: Subir artefacto de publicación
         uses: actions/upload-artifact@v4
