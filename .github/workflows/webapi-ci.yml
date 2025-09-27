@@ -1,0 +1,75 @@
+name: CI Web API (.NET)
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+# Evita que se acumulen ejecuciones viejas
+concurrency:
+  group: webapi-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'      # ajusta si usas 7.x/9.x
+
+      # Cache de paquetes NuGet
+      - name: Cache NuGet
+        uses: actions/cache@v4
+        with:
+          path: ~/.nuget/packages
+          key: nuget-${{ runner.os }}-${{ hashFiles('**/*.csproj', '**/global.json', '**/nuget.config') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build (Release)
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test --configuration Release --no-build --logger "trx;LogFileName=test_results.trx"
+
+      - name: Publicar resultados de pruebas
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: "**/TestResults/*.trx"
+
+  publish:
+    runs-on: ubuntu-latest
+    needs: build_test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.110'
+
+      - name: Publish (self-contained trim opcional)
+        # Cambia src/TuProyecto.Api por la ruta a tu .csproj de Web API
+        run: >
+          dotnet publish src/TuProyecto.Api/TuProyecto.Api.csproj
+          --configuration Release
+          --no-restore
+          --output ./publish
+          -p:PublishTrimmed=false
+
+      - name: Subir artefacto de publicación
+        uses: actions/upload-artifact@v4
+        with:
+          name: webapi-publish
+          path: publish/
