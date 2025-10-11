@@ -1,0 +1,12 @@
+services:
+  postgres:
+    image: postgres:13.21-alpine3.21
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=app_school
+    ports:
+      - "5432:5432"
+    volumes:
+      - "/home/manuel/HDD/cSharp/data_school:/var/lib/postgresql/data"
