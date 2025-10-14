@@ -30,6 +30,10 @@ namespace Dominio
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
-
+        public ICollection<Assignment>? CreatedAssignments { get; set; }
+        public ICollection<CourseSchedule>? Schedules { get; set; }
+        public ICollection<AttendanceSession>? AttendanceSessions { get; set; }
+        public ICollection<Exam>? Exams { get; set; }
+        public ICollection<ExtracurricularActivity>? ExtracurricularActivities { get; set; }
     }
 }

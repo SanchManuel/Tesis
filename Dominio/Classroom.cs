@@ -15,6 +15,9 @@ namespace Dominio
         public string? RoomNUmber { get; set; }
         public int HomeroomTeacherId { get; set; }
         public Teacher? HomeroomTeacher { get; set; }
-        public ICollection<Student> Students { get; set; } = new List<Student>();
+        public ICollection<Student>? Students { get; set; }
+        public ICollection<CourseSchedule>? Schedules { get; set; }
+        public ICollection<AttendanceSession>? AttendanceSessions { get; set; }
+        public ICollection<Event>? Events { get; set; }
     }
 }

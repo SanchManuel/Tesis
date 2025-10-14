@@ -14,5 +14,9 @@ namespace Dominio
         public string? Name { get; set; }
         public int HomeroomTeacherId { get; set; }
         public Teacher? HomeroomTeacher { get; set; }
+        public ICollection<Assignment>? Assignments { get; set; }
+        public ICollection<CourseSchedule>? Schedules { get; set; }
+        public ICollection<AttendanceSession>? AttendanceSessions { get; set; }
+        public ICollection<Exam>? Exams { get; set; }
     }
 }

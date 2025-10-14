@@ -27,8 +27,8 @@ namespace Dominio
         public bool IsActive { get; set; }
         public decimal Salary { get; set; }
         public string? EmploymentType { get; set; }
-        public DateTime CreatedAt
-        { get; set; }
+        public ICollection<ExtracurricularActivity>? ExtracurricularActivities { get; set; }
+        public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
     }
