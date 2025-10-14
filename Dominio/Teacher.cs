@@ -7,9 +7,11 @@ namespace Dominio
 {
     public class Teacher
     {
-        public int Id { get; set; }
         public int userId { get; set; }
         public User? user { get; set; }
+
+        public int SchoolId { get; set; }
+        public School? School { get; set; }
         public string? Name { get; set; }
         public string? LastName { get; set; }
         public DateTime dateOfBirth { get; set; }

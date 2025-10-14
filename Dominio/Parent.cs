@@ -8,10 +8,11 @@ namespace Dominio
 {
     public class Parent
     {
-        public int id { get; set; }
+        public int UserId { get; set; }
+        public User? User { get; set; }
         public int SchoolId { get; set; }
 
-        public string? FristName { get; set; }
+        public string? FirstName { get; set; }
         public string? LastName { get; set; }
 
         public string? MiddleName { get; set; }
@@ -32,10 +33,7 @@ namespace Dominio
         public string? WorkPhone { get; set; }
         public bool ReceiveEmail { get; set; }
         public bool ReceiveSMS { get; set; }
-        public string? PreferedLanguage { get; set; }
-
-        public int UserId { get; set; }
-        public User? User { get; set; }
+        public string? PreferredLanguage { get; set; }
 
         public ICollection<StudentParent>? Students { get; set; }
 

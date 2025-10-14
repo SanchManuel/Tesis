@@ -8,6 +8,8 @@ namespace Dominio
     public class School
     {
         public int Id { get; set; }
+        public int AdminId { get; set; }
+        public User? Admin { get; set; }
         public string? Name { get; set; }
         public string? Address { get; set; }
         public string? Phone { get; set; }
