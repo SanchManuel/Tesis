@@ -8,19 +8,17 @@ namespace Dominio
 {
     public class Parent
     {
+        public int Id { get; set; }
         public int UserId { get; set; }
         public User? User { get; set; }
         public int SchoolId { get; set; }
-
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-
         public string? MiddleName { get; set; }
         public string? NationalId { get; set; }
         public DateTime? BirthDate { get; set; }
         public string? Gender { get; set; }
         public string? PhotoUrl { get; set; }
-
         public string? Email { get; set; }
         public string? Phone { get; set; }
         public string? PhoneAlt { get; set; }
@@ -34,10 +32,8 @@ namespace Dominio
         public bool ReceiveEmail { get; set; }
         public bool ReceiveSMS { get; set; }
         public string? PreferredLanguage { get; set; }
-
         public ICollection<StudentParent>? Students { get; set; }
-
-        // Auditoría
+        public School? School { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
 

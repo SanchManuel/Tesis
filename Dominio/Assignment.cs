@@ -19,7 +19,7 @@ namespace Dominio
         public Course? Course { get; set; }
 
         public int classSectionId { get; set; }
-        public ClassSection? classSection { get; set; }
+        public ClassSection? ClassSection { get; set; }
 
         public int TeacherId { get; set; }
         public Teacher? Teacher { get; set; }

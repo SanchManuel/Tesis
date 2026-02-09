@@ -7,13 +7,13 @@ namespace Dominio
 {
     public class State
     {
-        public int id { get; set; }
-        public string? name { get; set; }
-        public string? acronimo { get; set; }
-        public int country_id { get; set; }
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public string? Acronimo { get; set; }
+        public int CountryId { get; set; }
         public Country? country { get; set; }
         public List<StateRegulatoryDependencies>? stateRegulatoryDependencies { get; set; }
-        public DateTime? updated_at { get; set; }
-        public DateTime? created_at { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
     }
 }

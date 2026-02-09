@@ -14,7 +14,7 @@ namespace Dominio
         public AttendanceSession? AttendanceSession { get; set; }
         public int StudentId { get; set; }
         public Student? Student { get; set; }
-        public string? status { get; set; } = "Present"; // Present, Absent, Excused, Tardy
+        public string? Status { get; set; } = "Present"; // Present, Absent, Excused, Tardy
         public bool IsExcused { get; set; } = false;
         public TimeSpan? MinutesLate { get; set; }
         public string? Reason { get; set; }

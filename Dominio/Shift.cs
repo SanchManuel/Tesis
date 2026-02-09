@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Shif
+    public class Shift
     {
         private int id;
         private string? name;

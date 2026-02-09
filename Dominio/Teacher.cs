@@ -7,25 +7,25 @@ namespace Dominio
 {
     public class Teacher
     {
-        public int userId { get; set; }
-        public User? user { get; set; }
-
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public User? User { get; set; }
         public int SchoolId { get; set; }
         public School? School { get; set; }
         public string? Name { get; set; }
         public string? LastName { get; set; }
-        public DateTime dateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
         public string? Address { get; set; }
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public string? Rfc { get; set; }
         public string? Curp { get; set; }
         public string? Photo { get; set; }
-        public int yearsOfExperience { get; set; }
-        public string? specialty { get; set; }
+        public int YearsOfExperience { get; set; }
+        public string? Specialty { get; set; }
         public string? Position { get; set; }
-        public int departmentId { get; set; }
-        public Department? department { get; set; }
+        public int DepartmentId { get; set; }
+        public Department? Department { get; set; }
         public DateTime? HireDate { get; set; }
         public string? EmploymentType { get; set; }
         public decimal Salary { get; set; }

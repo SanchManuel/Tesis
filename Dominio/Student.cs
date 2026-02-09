@@ -7,6 +7,7 @@ namespace Dominio
 {
     public class Student
     {
+        public int Id { get; set; }
         public int UserId { get; set; }
         public User? User { get; set; }
         public int SchoolId { get; set; }
@@ -27,21 +28,15 @@ namespace Dominio
         public string? GuardianName { get; set; }
         public string? GuardianPhone { get; set; }
         public string? GuardianEmail { get; set; }
-
         public int GradeId { get; set; }
         public Grade? Grade { get; set; }
-
         public DateTime EnrollmentDate { get; set; }
-        private string? EnrollmentStatus { get; set; }
+        public string? EnrollmentStatus { get; set; }
         public bool IsActive { get; set; } = true;
-
-
-
         public ICollection<AttendanceRecord>? AttendanceRecords { get; set; }
         public ICollection<StudentCourse>? Courses { get; set; }
         public ICollection<AssignmentSubmission>? Submissions { get; set; }
         public ICollection<ExtracurricularActivity>? ExtracurricularActivities { get; set; }
-        // 🔹 Auditoría
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime? UpdatedAt { get; set; }
 

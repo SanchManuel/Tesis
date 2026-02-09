@@ -11,7 +11,7 @@ namespace Dominio
         public int gradeId { get; set; }
         public Grade? grade { get; set; }
         public string? Name { get; set; }
-        public string? Coode { get; set; }
+        public string? Code { get; set; }
         public int? weeklyHours { get; set; }
     }
 }

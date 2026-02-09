@@ -8,7 +8,7 @@ namespace Dominio
 {
     public class ExamQuestion
     {
-        public int id { get; set; }
+        public int Id { get; set; }
         public int ExamId { get; set; }
         public Exam? Exam { get; set; }
 

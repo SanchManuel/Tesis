@@ -9,8 +9,10 @@ namespace Dominio
     {
         public int Id { get; set; }
 
-        public int gradeId { get; set; }
-        public Grade? grade { get; set; }
+        public int GradeId { get; set; }
+        public Grade? Grade { get; set; }
+        public int SchoolId { get; set; }
+        public School? School { get; set; }
         public string? Name { get; set; }
         public int HomeroomTeacherId { get; set; }
         public Teacher? HomeroomTeacher { get; set; }

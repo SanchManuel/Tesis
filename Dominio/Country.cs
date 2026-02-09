@@ -7,10 +7,10 @@ namespace Dominio
 {
     public class Country
     {
-        public int id { get; set; }
-        public string? name { get; set; }
-        public string? acronimo { get; set; }
-        public List<State>? states { get; set; }
-        public DateTime? created_at { get; set; }
+        public int Id { get; set; }
+        public string? Name { get; set; }
+        public string? Code { get; set; }
+        public List<State>? States { get; set; }
+        public DateTime? CreatedAt { get; set; }
     }
 }

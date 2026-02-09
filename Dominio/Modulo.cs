@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Dominio
 {
-    public class Modulos
+    public class Modulo
     {
         public int Id { get; set; }
         public string? Name { get; set; }
